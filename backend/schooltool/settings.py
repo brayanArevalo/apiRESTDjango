@@ -11,9 +11,16 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from corsheaders.defaults import default_headers
+import os
+#from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+STATICFILES_DIRS=(
+    os.path.join(BASE_DIR,'static'),
+)
 
 
 # Quick-start development settings - unsuitable for production
@@ -39,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'escuela',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -49,7 +57,26 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL=True
+
+CORS_ORIGIN_WHITELIST =[
+
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+
+    'http://localhost:8080',
+    'http://127.0.0.1:8080',
+
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    
+]
+
+
+
 
 ROOT_URLCONF = 'schooltool.urls'
 
